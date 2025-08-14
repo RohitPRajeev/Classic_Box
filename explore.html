@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Explore Games - Classic Box</title>
+  <link rel="icon" href="static/flappybirdicon.png" type="image/png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #fff;
+    }
+
+    header {
+      padding: 25px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1a1a1a;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8em;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 30px;
+      font-size: 1em;
+      font-weight: 300;
+    }
+
+    nav a:hover {
+      color: #c4a77d;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 40px 0 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8em;
+      color: #c4a77d;
+    }
+
+    .game-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .game-card {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .game-card .content {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .game-card h3 {
+      margin: 10px 0;
+      color: #c4a77d;
+    }
+
+    .game-card p {
+      font-size: 0.95em;
+      color: #ccc;
+      margin-bottom: 15px;
+    }
+
+    .play-btn {
+      background-color: #c4a77d;
+      color: #121212;
+      border: none;
+      padding: 10px 25px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .play-btn:hover {
+      background-color: #fff;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      background-color: #1a1a1a;
+      color: #777;
+      margin-top: 40px;
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 992px) {
+      .game-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .game-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="index.html" class="logo">Classic Box</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <!-- Main Title -->
+  <h1>Explore Our Games</h1>
+
+  <!-- Game Cards -->
+  <div class="game-container">
+
+    <!-- Game 1 -->
+    <div class="game-card">
+      <img src="static/ball.png" alt="Fly Ball">
+      <div class="content">
+        <h3>Fly Ball</h3>
+        <p>Enjoy our version of the Fly Ball game.</p>
+        <button class="play-btn" onclick="window.location.href='games/flappy.html'">Play</button>
+      </div>
+    </div>
+
+    <!-- Game 2 -->
+    <div class="game-card">
+      <img src="static/snake.png" alt="Snake Game">
+      <div class="content">
+        <h3>Snake Game</h3>
+        <p>Control the snake and eat the blocks!</p>
+        <button class="play-btn" onclick="window.location.href='games/snake.html'">Play</button>
+      </div>
+    </div>
+
+    <!-- Game 3 -->
+    <div class="game-card">
+      <img src="static/car.png" alt="2D Car Racing">
+      <div class="content">
+        <h3>2D Car Racing</h3>
+        <p>Race through traffic and beat your high score!</p>
+        <button class="play-btn" onclick="window.location.href='games/racing.html'">Play</button>
+      </div>
+    </div>
+
+    <!-- Game 4 -->
+    <div class="game-card">
+      <img src="static/tictactoe.png" alt="Tic Tac Toe">
+      <div class="content">
+        <h3>Tic Tac Toe</h3>
+        <p>Challenge your brain with the classic X vs O game.</p>
+        <button class="play-btn" onclick="window.location.href='games/tictactoe.html'">Play</button>
+      </div>
+    </div>
+
+    <!-- Game 5 -->
+    <div class="game-card">
+      <img src="static/brickbreaker.png" alt="Brick Breaker">
+      <div class="content">
+        <h3>Brick Breaker</h3>
+        <p>Break the bricks with the bouncing ball. Classic fun!</p>
+        <button class="play-btn" onclick="window.location.href='games/brickbreaker.html'">Play</button>
+      </div>
+    </div>
+
+    <!-- Game 6 -->
+    <div class="game-card">
+      <img src="static/memory.png" alt="Memory Match">
+      <div class="content">
+        <h3>Memory Match</h3>
+        <p>Match all the pairs and test your memory!</p>
+        <button class="play-btn" onclick="window.location.href='games/memory.html'">Play</button>
+      </div>
+    </div>
+    <!-- Game 7 -->
+
+    <div class="game-card">
+  <img src="static/shooter.png" alt="Shooter Game">
+  <div class="content">
+    <h3>Shooter Game</h3>
+    <p>Hit all the targets and score high!</p>
+    <button class="play-btn" onclick="window.location.href='games/shooter.html'">Play</button>
+  </div>
+</div>
+<!-- Game 8 -->
+<div class="game-card">
+  <img src="static/maze.jpg" alt="Maze Runner">
+  <div class="content">
+    <h3>Maze Runner</h3>
+    <p>Find your way out of the complex maze!</p>
+    <button class="play-btn" onclick="window.location.href='games/maze.html'">Play</button>
+  </div>
+</div>
+<!-- Game 9 -->
+
+<div class="game-card">
+  <img src="static/puzzle.jpg" alt="Puzzle Match">
+  <div class="content">
+    <h3>Puzzle Match</h3>
+    <p>Solve puzzles and level up your brain.</p>
+    <button class="play-btn" onclick="window.location.href='games/puzzle.html'">Play</button>
+  </div>
+</div>
+<!-- Game 10 -->
+<div class="game-card">
+  <img src="static/pong.jpg" alt="Pong Game">
+  <div class="content">
+    <h3>Pong Game</h3>
+    <p>The classic paddle-and-ball game brought to life.</p>
+    <button class="play-btn" onclick="window.location.href='games/pong.html'">Play</button>
+  </div>
+</div>
+  </div>
+  
+
+
+  
+  <footer>
+    &copy; 2025 Classic Box. All rights reserved.
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classic Box - Premium Small Games</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400&display=swap');
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 50px;
+      background-color: transparent;
+      position: absolute;
+      width: calc(100% - 100px);
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      margin-left: 30px;
+      font-size: 1em;
+      font-weight: 300;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #c4a77d;
+    }
+
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 0 20px;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.4) grayscale(0.3);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4em;
+      margin: 0 0 20px;
+    }
+
+    .hero-section p {
+      font-size: 1.2em;
+      font-weight: 300;
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+
+    .explore-button {
+      background-color: #c4a77d;
+      color: #121212;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.1em;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .explore-button:hover {
+      background-color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* --- Footer --- */
+    footer {
+      background-color: #1a1a1a;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 0.95em;
+    }
+
+    .footer-links {
+      margin-bottom: 15px;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #c4a77d;
+    }
+
+    .social-icons a {
+      color: #c4a77d;
+      margin: 0 8px;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+
+    .footer-copy {
+      margin-top: 15px;
+      color: #777;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .logo {
+        margin-bottom: 15px;
+      }
+
+      .hero-section h1 {
+        font-size: 2.8em;
+      }
+
+      .hero-section p {
+        font-size: 1em;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .social-icons {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="#" class="logo">Classic Box</a>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>Curated Gaming Elegance</h1>
+        <p>Discover a premium collection of small, thoughtful, and beautifully crafted games from independent creators.</p>
+        <button class="explore-button" onclick="window.location.href='explore.html'">Explore</button>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="social-icons">
+      <a href="#" title="Instagram">📷</a>
+      <a href="#" title="Twitter">🐦</a>
+      <a href="#" title="YouTube">📺</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2025 Classic Box. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

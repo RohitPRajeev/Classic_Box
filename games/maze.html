@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Maze Runner - Classic Box</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      background-color: #121212;
+      color: #c4a77d;
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin: 20px 0 10px;
+    }
+
+    canvas {
+      background-color: #1e1e1e;
+      border: 2px solid #c4a77d;
+      display: block;
+      margin: 20px auto;
+    }
+
+    #status {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    table {
+      width: 90%;
+      max-width: 500px;
+      margin: 30px auto;
+      border-collapse: collapse;
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      font-size: 1em;
+    }
+
+    th {
+      background-color: #c4a77d;
+      color: #121212;
+    }
+
+    tr:nth-child(even) {
+      background-color: #2a2a2a;
+    }
+
+    tr:hover {
+      background-color: #383838;
+    }
+
+    .btn-back {
+      margin: 20px auto;
+      padding: 10px 25px;
+      font-size: 1em;
+      background-color: #c4a77d;
+      color: #121212;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Maze Runner</h1>
+  <canvas id="mazeCanvas" width="500" height="500"></canvas>
+  <div id="status">Reach the green square!</div>
+
+  <!-- Leaderboard -->
+  <h2 style="color:#c4a77d;">Leaderboard</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Moves</th>
+      </tr>
+    </thead>
+    <tbody id="leaderboard-body"></tbody>
+  </table>
+
+  <button class="btn-back" onclick="window.location.href='explore.html'">← Back to Explore</button>
+
+  <script>
+    const canvas = document.getElementById("mazeCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const gridSize = 10;
+    const cellSize = canvas.width / gridSize;
+
+    const maze = [
+      [0,1,1,1,1,1,1,1,1,1],
+      [0,0,1,1,1,1,1,1,1,1],
+      [1,0,0,0,0,1,1,1,1,1],
+      [1,1,1,1,0,1,1,1,1,1],
+      [1,1,1,1,0,0,0,0,1,1],
+      [1,1,1,1,1,1,1,0,1,1],
+      [1,1,1,1,1,1,1,0,0,0],
+      [1,1,1,1,1,1,1,1,1,0],
+      [1,1,1,1,1,1,1,1,1,0],
+      [1,1,1,1,1,1,1,1,1,0]
+    ];
+
+    const player = { x: 0, y: 0 };
+    const goal = { x: 9, y: 9 };
+    let moves = 0;
+    let gameOver = false;
+
+    function drawMaze() {
+      for (let y = 0; y < gridSize; y++) {
+        for (let x = 0; x < gridSize; x++) {
+          ctx.fillStyle = maze[y][x] === 1 ? "#333" : "#1e1e1e";
+          ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+        }
+      }
+
+      // Goal
+      ctx.fillStyle = "green";
+      ctx.fillRect(goal.x * cellSize, goal.y * cellSize, cellSize, cellSize);
+
+      // Player
+      ctx.fillStyle = "#c4a77d";
+      ctx.fillRect(player.x * cellSize, player.y * cellSize, cellSize, cellSize);
+    }
+
+    function movePlayer(dx, dy) {
+      if (gameOver) return;
+
+      const newX = player.x + dx;
+      const newY = player.y + dy;
+
+      if (
+        newX >= 0 && newX < gridSize &&
+        newY >= 0 && newY < gridSize &&
+        maze[newY][newX] === 0
+      ) {
+        player.x = newX;
+        player.y = newY;
+        moves++;
+        drawMaze();
+
+        if (player.x === goal.x && player.y === goal.y) {
+          gameOver = true;
+          document.getElementById("status").textContent = `You reached the goal in ${moves} moves! 🎉`;
+
+          const name = prompt("Enter your name for the leaderboard:");
+          if (name) updateLeaderboard(moves, "leaderboard_maze", name);
+        }
+      }
+    }
+
+    function updateLeaderboard(score, key, name) {
+      let leaderboard = JSON.parse(localStorage.getItem(key)) || [];
+      leaderboard.push({ name: name, score: score });
+
+      leaderboard.sort((a, b) => a.score - b.score); // Lower moves = better
+      leaderboard = leaderboard.slice(0, 5); // Top 5
+
+      localStorage.setItem(key, JSON.stringify(leaderboard));
+      showLeaderboard(key);
+    }
+
+    function showLeaderboard(key) {
+      const tbody = document.getElementById("leaderboard-body");
+      tbody.innerHTML = "";
+
+      const leaderboard = JSON.parse(localStorage.getItem(key)) || [];
+      leaderboard.forEach((entry, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${entry.name}</td>
+          <td>${entry.score}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowUp") movePlayer(0, -1);
+      if (e.key === "ArrowDown") movePlayer(0, 1);
+      if (e.key === "ArrowLeft") movePlayer(-1, 0);
+      if (e.key === "ArrowRight") movePlayer(1, 0);
+    });
+
+    drawMaze();
+    showLeaderboard("leaderboard_maze");
+  </script>
+
+</body>
+</html>

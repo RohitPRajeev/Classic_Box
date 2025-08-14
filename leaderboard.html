@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaderboard - Classic Box</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #c4a77d;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 60%;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #c4a77d;
+    }
+
+    th {
+      background-color: #1e1e1e;
+    }
+
+    .btn-back {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #c4a77d;
+      border: none;
+      color: #121212;
+      cursor: pointer;
+    }
+
+    .btn-back:hover {
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Leaderboard - Fly Ball</h1>
+
+  <table id="leaderboardTable">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Username</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <button class="btn-back" onclick="window.location.href='explore.html'">← Back to Explore</button>
+
+  <script>
+    fetch('get_leaderboard.php?game=flyball')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          const tbody = document.querySelector("#leaderboardTable tbody");
+          tbody.innerHTML = "";
+
+          data.data.forEach((entry, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${index + 1}</td>
+              <td>${entry.username}</td>
+              <td>${entry.score}</td>
+            `;
+            tbody.appendChild(row);
+          });
+        } else {
+          alert("Error: " + data.message);
+        }
+      })
+      .catch(err => {
+        console.error("Fetch error:", err);
+        alert("Could not fetch leaderboard. Is your server running?");
+      });
+  </script>
+</body>
+</html>
